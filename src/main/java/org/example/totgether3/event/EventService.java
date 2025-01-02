@@ -35,10 +35,11 @@ public class EventService {
         eventRepository.save(event);
     }
 
-    public List<EventDto> getEvents() {
+    public List<EventDto> getEvents(String dateStr) {
         var user = userService.getCurrentUser();
+        var date = LocalDateTime.parse(dateStr, DATE_FORMATTER);
 
-        return eventRepository.findAllByUser(user).stream().map(event -> new EventDto(
+        return eventRepository.findAllByUserAndDate(user, date).stream().map(event -> new EventDto(
                 event.getPatientName(),
                 event.getDate().format(DATE_FORMATTER),
                 event.getRoom(),

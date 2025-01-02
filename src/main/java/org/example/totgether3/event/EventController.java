@@ -23,8 +23,8 @@ public class EventController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<EventDto> getEvents() {
-        return eventService.getEvents();
+    public List<EventDto> getEvents(@RequestParam String date) {
+        return eventService.getEvents(date);
     }
 
 }

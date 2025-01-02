@@ -32,6 +32,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             @NonNull HttpServletResponse response,
             @NonNull FilterChain filterChain) throws ServletException, IOException {
 
+        log.info("Request Headers:");
+        request.getHeaderNames().asIterator().forEachRemaining(headerName ->
+                log.info("{}: {}", headerName, request.getHeader(headerName))
+        );
+
         var authHeader = request.getHeader("Authorization");
         if (authHeader == null || !authHeader.startsWith("Bearer")) {
             log.debug("Request without JWT");

@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 public class EventService {
 
     private final EventRepository eventRepository;
-    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy'T'HH:mm");
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy'T'HH:mm");
 
     public void createEvent(CreateEventRequest createEventRequest) {
         var date = LocalDateTime.parse(createEventRequest.getDate(), DATE_FORMATTER);

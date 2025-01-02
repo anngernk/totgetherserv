@@ -5,9 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.totgether3.event.dto.CreateEventRequest;
 import org.example.totgether3.event.dto.EventDto;
 import org.example.totgether3.user.UserService;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -19,11 +19,12 @@ public class EventService {
 
     private final UserService userService;
     private final EventRepository eventRepository;
-    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+    private static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
     public void createEvent(CreateEventRequest createEventRequest) {
         var user = userService.getCurrentUser();
-        var date = LocalDateTime.parse(createEventRequest.getDate(), DATE_FORMATTER);
+        var date = LocalDateTime.parse(createEventRequest.getDate(), DATE_TIME_FORMAT);
         var event = Event.builder()
                 .patientName(createEventRequest.getPatientName())
                 .date(date)
@@ -37,11 +38,13 @@ public class EventService {
 
     public List<EventDto> getEvents(String dateStr) {
         var user = userService.getCurrentUser();
-        var date = LocalDateTime.parse(dateStr, DATE_FORMATTER);
+        var date = LocalDate.parse(dateStr, DATE_FORMAT);
+        var startOfDay = date.atStartOfDay();
+        var endOfDay = date.atTime(23, 59, 59);
 
-        return eventRepository.findAllByUserAndDate(user, date).stream().map(event -> new EventDto(
+        return eventRepository.findAllByUserAndDateBetween(user, startOfDay, endOfDay).stream().map(event -> new EventDto(
                 event.getPatientName(),
-                event.getDate().format(DATE_FORMATTER),
+                event.getDate().format(DATE_FORMAT),
                 event.getRoom(),
                 event.getReason()
         )).toList();

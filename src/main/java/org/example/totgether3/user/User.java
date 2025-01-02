@@ -2,6 +2,7 @@ package org.example.totgether3.user;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.example.totgether3.event.Event;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -29,6 +30,9 @@ public class User implements UserDetails {
 
     @Column(nullable = false)
     private String password;
+
+    @OneToMany(mappedBy = "user")
+    private List<Event> events;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

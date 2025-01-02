@@ -2,6 +2,7 @@ package org.example.totgether3.event;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.example.totgether3.user.User;
 
 import java.time.LocalDateTime;
 
@@ -32,5 +33,8 @@ public class Event {
 
     @Column(nullable = false)
     private String reason;
+
+    @ManyToOne
+    private User user;
 
 }

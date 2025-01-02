@@ -2,6 +2,7 @@ package org.example.totgether3.event;
 
 import lombok.RequiredArgsConstructor;
 import org.example.totgether3.event.dto.CreateEventRequest;
+import org.example.totgether3.event.dto.EventDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +23,7 @@ public class EventController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<Event> getEvents() {
+    public List<EventDto> getEvents() {
         return eventService.getEvents();
     }
 

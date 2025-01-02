@@ -3,6 +3,7 @@ package org.example.totgether3.event;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.totgether3.event.dto.CreateEventRequest;
+import org.example.totgether3.event.dto.EventDto;
 import org.example.totgether3.user.UserService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -34,8 +35,14 @@ public class EventService {
         eventRepository.save(event);
     }
 
-    public List<Event> getEvents() {
+    public List<EventDto> getEvents() {
         var user = userService.getCurrentUser();
-        return eventRepository.findAllByUser(user);
+
+        return eventRepository.findAllByUser(user).stream().map(event -> new EventDto(
+                event.getPatientName(),
+                event.getDate().format(DATE_FORMATTER),
+                event.getRoom(),
+                event.getReason()
+        )).toList();
     }
 }

@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter;
 public class EventService {
 
     private final EventRepository eventRepository;
-    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy'T'HH:mm");
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
 
     public void createEvent(CreateEventRequest createEventRequest) {
         log.info("Creating event: {}", createEventRequest);

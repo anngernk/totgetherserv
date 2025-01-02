@@ -31,6 +31,7 @@ public class GlobalExceptionHandler {
         log.error(String.valueOf(ex));
         log.error(String.valueOf(ex.getMessage()));
         log.error(String.valueOf(ex.getCause()));
+        ex.printStackTrace();
         return new GeneralErrorResponse(ex.getMessage(), LocalDateTime.now());
     }
 }

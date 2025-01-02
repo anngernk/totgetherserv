@@ -1,9 +1,9 @@
 package org.example.totgether3.auth;
 
 import lombok.RequiredArgsConstructor;
-import org.example.totgether3.dto.LoginRequest;
-import org.example.totgether3.dto.LoginResponse;
-import org.example.totgether3.dto.RegisterRequest;
+import org.example.totgether3.auth.dto.LoginRequest;
+import org.example.totgether3.auth.dto.LoginResponse;
+import org.example.totgether3.auth.dto.RegisterRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 

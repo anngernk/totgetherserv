@@ -3,9 +3,9 @@ package org.example.totgether3.auth;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.totgether3.dto.LoginRequest;
-import org.example.totgether3.dto.LoginResponse;
-import org.example.totgether3.dto.RegisterRequest;
+import org.example.totgether3.auth.dto.LoginRequest;
+import org.example.totgether3.auth.dto.LoginResponse;
+import org.example.totgether3.auth.dto.RegisterRequest;
 import org.example.totgether3.user.User;
 import org.example.totgether3.user.UserRepository;
 import org.springframework.security.authentication.AuthenticationManager;

@@ -1,7 +1,6 @@
 package org.example.totgether3.exception;
 
 import lombok.extern.slf4j.Slf4j;
-import org.example.totgether3.dto.GeneralErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.ExceptionHandler;

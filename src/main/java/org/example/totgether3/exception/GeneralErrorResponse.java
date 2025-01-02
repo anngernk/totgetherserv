@@ -1,4 +1,4 @@
-package org.example.totgether3.dto;
+package org.example.totgether3.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

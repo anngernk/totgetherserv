@@ -30,10 +30,6 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String password;
 
-    public boolean checkPassword(String password) {
-        return this.password.equals(password);
-    }
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of();

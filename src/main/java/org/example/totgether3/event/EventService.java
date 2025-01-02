@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -31,5 +32,10 @@ public class EventService {
                 .build();
 
         eventRepository.save(event);
+    }
+
+    public List<Event> getEvents() {
+        var user = userService.getCurrentUser();
+        return eventRepository.findAllByUser(user);
     }
 }

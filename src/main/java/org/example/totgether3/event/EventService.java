@@ -1,12 +1,14 @@
 package org.example.totgether3.event;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.example.totgether3.event.dto.CreateEventRequest;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class EventService {
@@ -15,6 +17,7 @@ public class EventService {
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy'T'HH:mm");
 
     public void createEvent(CreateEventRequest createEventRequest) {
+        log.info("Creating event: {}", createEventRequest);
         var date = LocalDateTime.parse(createEventRequest.getDate(), DATE_FORMATTER);
         var event = Event.builder()
                 .patientName(createEventRequest.getPatientName())

@@ -28,7 +28,7 @@ public class JwtService {
         this.secretKey = Keys.hmacShaKeyFor(keyBytes);
     }
 
-    public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails, int expiration) {
+    public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
         return Jwts
                 .builder()
                 .header().add("typ", "JWT")
@@ -36,13 +36,8 @@ public class JwtService {
                 .claims(extraClaims)
                 .subject(userDetails.getUsername())
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + expiration))
                 .signWith(getSigningKey())
                 .compact();
-    }
-
-    public String generateToken(Map<String, Object> claims, UserDetails userDetails) {
-        return generateToken(claims, userDetails);
     }
 
     public String generateToken(UserDetails userDetails) {
